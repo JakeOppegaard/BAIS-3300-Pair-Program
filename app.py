@@ -1,56 +1,35 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-friends_dict = [
-    {"name": "Test", "flavor": "swirl", "read": "yes", "activities": "reading"}
-]
-
-@app.route("/", methods=["GET", "POST"])
+# a. Homepage route
+@app.route('/')
 def index():
-    return render_template(
-        "index.html", pageTitle="Web form template", friends=friends_dict
-    )
+    return render_template('index.html')
 
-@app.route("/add", methods=["POST"])
+# b. /add route to collect and process data from the form
+@app.route('/add', methods=['POST'])
 def add():
-    print("inside add function")
-    if request.method == "POST":
+    # Extract data from the form
+    field1 = request.form.get('field1')
+    field2 = request.form.get('field2')
+    # Add other fields as needed
 
-        form = request.form
+    # Process the data (example: sum of two numbers)
+    result = int(field1) + int(field2)
 
-        fname = form["fname"]
-        flavor = form["flavor"]
-        read = form["read"]
-        activities = form.getlist("activities")  # this is a PYthon list
+    # Redirect to the desired page (example: result page) with the result
+    return redirect(url_for('result', result=result))
 
-        print(fname)
-        print(flavor)
-        print(read)
-        print(activities)
-
-        activities_string = ", ".join(activities)  # make the Python list into a string
-
-        friend_dict = {
-            "name": fname,
-            "flavor": flavor,
-            "read": read,
-            "activities": activities_string,
-        }
-
-        print(friend_dict)
-        friends_dict.append(
-            friend_dict
-        )  # append this dictionary entry to the larger friends dictionary
-        print(friends_dict)
-        return redirect(url_for("index"))
-    else:
-        return redirect(url_for("index"))
-
-@app.route("/about")
+# c. About route
+@app.route('/about')
 def about():
-    return render_template("about.html", pageTitle="About")
+    return render_template('about.html')
 
+# Route to display the result of the /add route
+@app.route('/result/<int:result>')
+def result(result):
+    return render_template('result.html', result=result)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
