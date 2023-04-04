@@ -1,10 +1,22 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "alsknq3rAg$GernaeasSEF^woei4r098HRFYUKioq73498"
 
 friends_dict = [
-    {"name": "Test", "flavor": "swirl", "read": "yes", "activities": "reading"}
+    {"title": "Harry Potter", "author": "J.K Rowling", "pages": "345", "genre": "Mystery", "details":"I own this book", "how_got": "I purchased it"}
 ]
+
+# error pages
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template("500.html"), 500
+
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -13,42 +25,52 @@ def index():
         "index.html", pageTitle="Web form template", friends=friends_dict
     )
 
-
-@app.route("/add", methods=["POST"])
+@app.route('/add', methods=['POST'])
 def add():
-    print("inside add function")
     if request.method == "POST":
-
         form = request.form
 
-        fname = form["fname"]
-        flavor = form["flavor"]
-        read = form["read"]
-        activities = form.getlist("activities")  # this is a PYthon list
+        title = form['fname']
+        author = form['lname']
+        pages = form['pages']
+        genre = form['genre']
+        details = form.getlist('details')
+        how_got = form['how_got']
 
-        print(fname)
-        print(flavor)
-        print(read)
-        print(activities)
+        print(title)
+        print(author)
+        print(pages)
+        print(genre)
+        print(details)
+        print(how_got)
 
-        activities_string = ", ".join(activities)  # make the Python list into a string
+        details_string = ", ".join(details)
 
         friend_dict = {
-            "name": fname,
-            "flavor": flavor,
-            "read": read,
-            "activities": activities_string,
+            'title': title,
+            'author': author,
+            'pages': pages,
+            'genre': genre,
+            'details': details_string,
+            'how_got': how_got
         }
 
         print(friend_dict)
-        friends_dict.append(
-            friend_dict
-        )  # append this dictionary entry to the larger friends dictionary
+        friends_dict.append(friend_dict)
         print(friends_dict)
+
+        flash(
+            "The friend ;" + title + " has been added to the database.",
+            "success",
+        )
         return redirect(url_for("index"))
     else:
         return redirect(url_for("index"))
 
+@app.route("/about", methods=["GET"])
+def about():
+    return render_template("about.html", pageTitle="About")
 
 if __name__ == "__main__":
     app.run(debug=True)
+
