@@ -34,7 +34,7 @@ def add():
         pages = form['pages']
         genre = form['genre']
         details = form.getlist('details')
-        how_got = ['how_got']
+        how_got = form['how_got']
 
         print(title)
         print(author)
@@ -50,7 +50,7 @@ def add():
             'author': author,
             'pages': pages,
             'genre': genre,
-            'details': details,
+            'details': details_string,
             'how_got': how_got
         }
 
