@@ -1,6 +1,7 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "alsknq3rAg$GernaeasSEF^woei4r098HRFYUKioq73498"
 
 friends_dict = [
     {"title": "Harry Potter", "author": "J.K Rowling", "pages": "345", "genre": "Mystery", "details":"I own this book", "how_got": "I purchased it"}
@@ -57,6 +58,11 @@ def add():
         print(friend_dict)
         friends_dict.append(friend_dict)
         print(friends_dict)
+
+        flash(
+            "The friend ;" + title + " has been added to the database.",
+            "success",
+        )
         return redirect(url_for("index"))
     else:
         return redirect(url_for("index"))
@@ -67,3 +73,4 @@ def about():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
