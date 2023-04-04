@@ -6,6 +6,18 @@ friends_dict = [
     {"title": "Harry Potter", "author": "J.K Rowling", "pages": "345", "genre": "Mystery", "details":"I own this book", "how_got": "I purchased it"}
 ]
 
+# error pages
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template("500.html"), 500
+
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     return render_template(
