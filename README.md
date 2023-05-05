@@ -4,7 +4,7 @@
 Basic python Flask Web application where users can track the books they've owned and read  
 ___
 
-I completed this roject as part of a Digital Product Managment class. To learn about dynamic web applications, user expierence, and user interfaces.
+I completed this project as part of a Digital Product Managment class. I learned about dynamic web applications, user expierence, and user interfaces:
 
 1. Clone this repository to local computer.
 
@@ -16,4 +16,4 @@ I completed this roject as part of a Digital Product Managment class. To learn a
 
 5. Run the program using 'run flask'
 
-Our application consists of a base.html, index.html, and a about page. In our index we ask questions about books then put the results in a list under. In our about page we have our names and a picture of ourselves.
+Our application consists of a base.html, index.html, and a about page in the templates folder. In our index we ask questions about books then put the results in a list under. In our about page we have our names and a picture of ourselves.
