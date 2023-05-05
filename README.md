@@ -1,7 +1,7 @@
 # BAIS-3300-Pair-Program
 ### Jake Oppegaard & Ben Olson
 
-Basic python Flask Web application where users can track the books they've owned and read  
+Basic python Flask Web application where users can track the books they've owned and read 📚
 ___
 
 I completed this project as part of a Digital Product Managment class. I learned about dynamic web applications, user expierence, and user interfaces:
