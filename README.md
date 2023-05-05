@@ -1,4 +1,6 @@
 # BAIS-3300-Pair-Program
+![Flask badge](https://img.shields.io/static/v1?message=Flask&logo=Flask&labelColor=grey&color=grey&logoColor=white&label=%20&style=for-the-badge)
+
 ### Jake Oppegaard & Ben Olson
 
 Basic python Flask Web application where users can track the books they've owned and read 📚
